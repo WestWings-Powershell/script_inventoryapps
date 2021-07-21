@@ -1,5 +1,5 @@
 # Заполняем переменные для работы 
-$Path = "Z:\IT"
+$Path = "\\SMR01\Share_Z\IT"
 $FileName = "APPsInventory.json"
 
 # Фильтр условно платных приложений
@@ -24,7 +24,7 @@ $AppFilters = @("Microsoft Office 2010 Standard", `
     "КриптоПро CSP")
 
 # Проводим проверку установленного ПО     
-$DataApps = Get-CimInstance -ClassName Win32_Product
+$DataApps = Get-WMIObject -ClassName Win32_Product
 $PayApps = ForEach ($Filter in $AppFilters){
     $DataApps.where{$_.name -like "$Filter*"}   
 }
