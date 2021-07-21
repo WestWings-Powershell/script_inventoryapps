@@ -1,6 +1,8 @@
 # Заполняем переменные для работы 
-$Path = "c:"
-$FileName = "Temp.json"
+$Path = "Z:\IT"
+$FileName = "APPsInventory.json"
+
+# Фильтр условно платных приложений
 $AppFilters = @("Microsoft Office 2010 Standard", `
     "Microsoft Office 2010 стандартный", `
     "Microsoft Office 2010 Publisher ", `
