@@ -45,9 +45,9 @@ $NewData = [PSCustomObject]@{
     IP = ((Get-NetIPAddress).where{$_.IPAddress -like '192*'}).IPAddress
     Users = (Get-ChildItem C:\Users\*).Name
     AllApps = ($DataApps).Name
-    CountAllApps = ($DataApps).Count
+    CountAllApps = ($DataApps).name.Count
     PayApps = ($PayApps).Name
-    CountPayApps = ($PayApps).count
+    CountPayApps = ($PayApps).name.Count
 }
 
 # Делаем проверку наличия файа и записываем данные в файл в JSON формате
@@ -64,13 +64,12 @@ if ($null -eq $JSONFind){
 else {
     $OldData = Get-Content $Path\$FileName
     $OldObjectData = $OldData | Select-Object
-    $OldJSONData = $OldObjectData | ConvertFrom-Json
-    $uniqueComps = ($OldJSONData + $NewData).computername | Get-Unique 
+    $uniqueComps = ($OldObjectData + $NewData).PCName | Get-Unique 
     $uniqueData = foreach ($uniqueComp in $uniqueComps) {
-        $Data = $NewData | Where-Object {$_.computername -like "$uniqueComp"} 
+        $Data = $NewData | Where-Object {$_.PCName -like "$uniqueComp"} 
         $Data
     }
     
-    ConvertTo-Json -InputObject $uniqueData | Out-File $JSONPath -Encoding utf8
+    # Конвертируем обратно и записываем в файл 
+    ConvertTo-Json -InputObject $uniqueData | Out-File $Path\$FileName  -Encoding utf8
 }
-
