@@ -1,15 +1,3 @@
-# Функция обновления ключей хэштаблицы - взято отсюда 
-# https://coderoad.ru/8800375/%D0%A1%D0%BB%D0%B8%D1%8F%D0%BD%D0%B8%D0%B5-%D1%85%D1%8D%D1%88%D1%82%D0%B0%D0%B1%D0%BE%D0%B2-%D0%B2-PowerShell-%D0%BA%D0%B0%D0%BA
-Function Merge-Hashtables {
-    $Output = @{}
-    ForEach ($Hashtable in ($Input + $Args)) {
-        If ($Hashtable -is [Hashtable]) {
-            ForEach ($Key in $Hashtable.Keys) {$Output.$Key = $Hashtable.$Key}
-        }
-    }
-    $Output
-}
-
 # Заполняем переменные для работы 
 $Path = "c:"
 $FileName = "Temp.json"
